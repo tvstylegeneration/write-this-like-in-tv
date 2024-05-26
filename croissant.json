@@ -1,0 +1,706 @@
+{
+    "@context": {
+        "@language": "en",
+        "@vocab": "https://schema.org/",
+        "citeAs": "cr:citeAs",
+        "column": "cr:column",
+        "conformsTo": "dct:conformsTo",
+        "cr": "http://mlcommons.org/croissant/",
+        "rai": "http://mlcommons.org/croissant/RAI/",
+        "data": {
+            "@id": "cr:data",
+            "@type": "@json"
+        },
+        "dataType": {
+            "@id": "cr:dataType",
+            "@type": "@vocab"
+        },
+        "dct": "http://purl.org/dc/terms/",
+        "examples": {
+            "@id": "cr:examples",
+            "@type": "@json"
+        },
+        "extract": "cr:extract",
+        "field": "cr:field",
+        "fileProperty": "cr:fileProperty",
+        "fileObject": "cr:fileObject",
+        "fileSet": "cr:fileSet",
+        "format": "cr:format",
+        "includes": "cr:includes",
+        "isLiveDataset": "cr:isLiveDataset",
+        "jsonPath": "cr:jsonPath",
+        "key": "cr:key",
+        "md5": "cr:md5",
+        "parentField": "cr:parentField",
+        "path": "cr:path",
+        "recordSet": "cr:recordSet",
+        "references": "cr:references",
+        "regex": "cr:regex",
+        "repeated": "cr:repeated",
+        "replace": "cr:replace",
+        "sc": "https://schema.org/",
+        "separator": "cr:separator",
+        "source": "cr:source",
+        "subField": "cr:subField",
+        "transform": "cr:transform"
+    },
+    "@type": "sc:Dataset",
+    "name": "write-this-like-tv-character",
+    "description": "This dataset created for the paper \"Your Task is to Write this Title Like a TV Character\". The original source of the data is TVR ([Lei et al., 2020](https://tvr.cs.unc.edu/)).\nThe dataset contains lines from scripted utterances of characters from six TV shows, taken from TVR. We added for each line three additional attributes:\n1) 'style_prob': a number between 0 and 1 indicating the degree to which style is present in each line.\n2) 'neutral_line': a \"destylized\" version of the line.\n3) 'content': a \"destylized\" description of the content of the line.\n\nThe dataset includes three files:\n- all_data.csv - all of the lines we augmented with 'style_prob', 'nuetral_line', and 'content'.\n- fine_tuning_data.csv - the data we used for fine tuning.\n- golden_test.csv - the data we used for test.\n\nThe full procedure of adding the additional attributes, splitting the data, and creating the golden test are described in the paper.",
+    "conformsTo": "http://mlcommons.org/croissant/1.0",
+    "license": "https://spdx.org/licenses/MIT.html",
+    "url": "https://github.com/tvstylegeneration/write-this-like-a-tv-character",
+    "version": "1.0.0",
+    "distribution": [
+        {
+            "@type": "cr:FileObject",
+            "@id": "github-repository",
+            "name": "github-repository",
+            "description": "The repository of the paper \"Your Task is to Write this Title Like a TV Character\"",
+            "contentUrl": "https://github.com/tvstylegeneration/write-this-like-a-tv-character",
+            "encodingFormat": "git+https",
+            "sha256": "main"
+        },
+        {
+            "@type": "cr:FileSet",
+            "@id": "all_data",
+            "name": "all_data",
+            "description": "Full dataset",
+            "containedIn": {
+                "@id": "github-repository"
+            },
+            "encodingFormat": "text/csv",
+            "includes": "data/all_data.csv"
+        },
+        {
+            "@type": "cr:FileSet",
+            "@id": "fine_tuning_data",
+            "name": "fine_tuning_data",
+            "description": "Data used for fine-tuning in the paper",
+            "containedIn": {
+                "@id": "github-repository"
+            },
+            "encodingFormat": "text/csv",
+            "includes": "data/fine_tuning_data.csv"
+        },
+        {
+            "@type": "cr:FileSet",
+            "@id": "golden_test",
+            "name": "golden_test",
+            "description": "Data used for test in the paper",
+            "containedIn": {
+                "@id": "github-repository"
+            },
+            "encodingFormat": "text/csv",
+            "includes": "data/golden_test.csv"
+        }
+    ],
+    "recordSet": [
+        {
+            "@type": "cr:RecordSet",
+            "@id": "all_data_records",
+            "name": "all_data_records",
+            "field": [
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/character",
+                    "name": "character",
+                    "description": "The name of the character",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "character"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/text",
+                    "name": "text",
+                    "description": "The line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "text"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/series",
+                    "name": "series",
+                    "description": "The name of the series",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "series"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/season",
+                    "name": "season",
+                    "description": "The season's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "season"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/episode",
+                    "name": "episode",
+                    "description": "The episode's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "episode"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/segment",
+                    "name": "segment",
+                    "description": "The segment's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "segment"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/clip",
+                    "name": "clip",
+                    "description": "The clip's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "clip"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/line",
+                    "name": "line",
+                    "description": "The line's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/character_id",
+                    "name": "character_id",
+                    "description": "The character id: series name + character name",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "character_id"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/context",
+                    "name": "context",
+                    "description": "A few lines before and after the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "context"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/neutral_line",
+                    "name": "neutral_line",
+                    "description": "A destylized version of the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "neutral_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/content",
+                    "name": "content",
+                    "description": "A description of the line's content",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "content"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/style_prob",
+                    "name": "style_prob",
+                    "description": "style probability: a 0-1 signal of how stylistic the line is",
+                    "dataType": "sc:Float",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "style_prob"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "cr:RecordSet",
+            "@id": "fine_tuning_records",
+            "name": "fine_tuning_records",
+            "field": [
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/character",
+                    "name": "character",
+                    "description": "The name of the character",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "character"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/text",
+                    "name": "text",
+                    "description": "The line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "text"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/series",
+                    "name": "series",
+                    "description": "The name of the series",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "series"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/season",
+                    "name": "season",
+                    "description": "The season's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "season"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/episode",
+                    "name": "episode",
+                    "description": "The episode's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "episode"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/segment",
+                    "name": "segment",
+                    "description": "The segment's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "segment"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/clip",
+                    "name": "clip",
+                    "description": "The clip's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "clip"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/line",
+                    "name": "line",
+                    "description": "The line's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/character_id",
+                    "name": "character_id",
+                    "description": "The character id: series name + character name",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "character_id"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/context",
+                    "name": "context",
+                    "description": "A few lines before and after the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "context"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/neutral_line",
+                    "name": "neutral_line",
+                    "description": "A destylized version of the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "neutral_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/content",
+                    "name": "content",
+                    "description": "A description of the line's content",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "content"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/style_prob",
+                    "name": "style_prob",
+                    "description": "style probability: a 0-1 signal of how stylistic the line is",
+                    "dataType": "sc:Float",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "style_prob"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "cr:RecordSet",
+            "@id": "golden_test_records",
+            "name": "golden_test_records",
+            "field": [
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/character",
+                    "name": "character",
+                    "description": "The name of the character",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "character"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/text",
+                    "name": "text",
+                    "description": "The line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "text"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/series",
+                    "name": "series",
+                    "description": "The name of the series",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "series"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/season",
+                    "name": "season",
+                    "description": "The season's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "season"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/episode",
+                    "name": "episode",
+                    "description": "The episode's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "episode"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/segment",
+                    "name": "segment",
+                    "description": "The segment's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "segment"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/clip",
+                    "name": "clip",
+                    "description": "The clip's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "clip"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/line",
+                    "name": "line",
+                    "description": "The line's number",
+                    "dataType": "sc:Integer",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/character_id",
+                    "name": "character_id",
+                    "description": "The character id: series name + character name",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "character_id"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/context",
+                    "name": "context",
+                    "description": "A few lines before and after the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "context"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/neutral_line",
+                    "name": "neutral_line",
+                    "description": "A destylized version of the line",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "neutral_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/content",
+                    "name": "content",
+                    "description": "A description of the line's content",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "content"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/style_prob",
+                    "name": "style_prob",
+                    "description": "style probability: a 0-1 signal of how stylistic the line is",
+                    "dataType": "sc:Float",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "style_prob"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
