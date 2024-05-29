@@ -238,21 +238,6 @@
                 },
                 {
                     "@type": "cr:Field",
-                    "@id": "all_data/context",
-                    "name": "context",
-                    "description": "A few lines before and after the line",
-                    "dataType": "sc:Text",
-                    "source": {
-                        "fileSet": {
-                            "@id": "all_data"
-                        },
-                        "extract": {
-                            "column": "context"
-                        }
-                    }
-                },
-                {
-                    "@type": "cr:Field",
                     "@id": "all_data/neutral_line",
                     "name": "neutral_line",
                     "description": "A destylized version of the line",
@@ -293,6 +278,51 @@
                         },
                         "extract": {
                             "column": "style_prob"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/context_previous_lines",
+                    "name": "context_previous_lines",
+                    "description": "Up to two lines preceding the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "context_previous_lines"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/context_current_line",
+                    "name": "context_current_line",
+                    "description": "the current utterance from the dialog",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "context_current_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "all_data/context_following_lines",
+                    "name": "context_following_lines",
+                    "description": "Up to two lines following the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "all_data"
+                        },
+                        "extract": {
+                            "column": "context_following_lines"
                         }
                     }
                 }
@@ -440,21 +470,6 @@
                 },
                 {
                     "@type": "cr:Field",
-                    "@id": "fine_tuning/context",
-                    "name": "context",
-                    "description": "A few lines before and after the line",
-                    "dataType": "sc:Text",
-                    "source": {
-                        "fileSet": {
-                            "@id": "fine_tuning_data"
-                        },
-                        "extract": {
-                            "column": "context"
-                        }
-                    }
-                },
-                {
-                    "@type": "cr:Field",
                     "@id": "fine_tuning/neutral_line",
                     "name": "neutral_line",
                     "description": "A destylized version of the line",
@@ -495,6 +510,51 @@
                         },
                         "extract": {
                             "column": "style_prob"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/context_previous_lines",
+                    "name": "context_previous_lines",
+                    "description": "Up to two lines preceding the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "context_previous_lines"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/context_current_line",
+                    "name": "context_current_line",
+                    "description": "the current utterance from the dialog",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "context_current_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "fine_tuning/context_following_lines",
+                    "name": "context_following_lines",
+                    "description": "Up to two lines following the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "fine_tuning_data"
+                        },
+                        "extract": {
+                            "column": "context_following_lines"
                         }
                     }
                 }
@@ -642,21 +702,6 @@
                 },
                 {
                     "@type": "cr:Field",
-                    "@id": "golden_test/context",
-                    "name": "context",
-                    "description": "A few lines before and after the line",
-                    "dataType": "sc:Text",
-                    "source": {
-                        "fileSet": {
-                            "@id": "golden_test"
-                        },
-                        "extract": {
-                            "column": "context"
-                        }
-                    }
-                },
-                {
-                    "@type": "cr:Field",
                     "@id": "golden_test/neutral_line",
                     "name": "neutral_line",
                     "description": "A destylized version of the line",
@@ -697,6 +742,51 @@
                         },
                         "extract": {
                             "column": "style_prob"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/context_previous_lines",
+                    "name": "context_previous_lines",
+                    "description": "Up to two lines preceding the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "context_previous_lines"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/context_current_line",
+                    "name": "context_current_line",
+                    "description": "the current utterance from the dialog",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "context_current_line"
+                        }
+                    }
+                },
+                {
+                    "@type": "cr:Field",
+                    "@id": "golden_test/context_following_lines",
+                    "name": "context_following_lines",
+                    "description": "Up to two lines following the current utterance from the dialog, if there are such",
+                    "dataType": "sc:Text",
+                    "source": {
+                        "fileSet": {
+                            "@id": "golden_test"
+                        },
+                        "extract": {
+                            "column": "context_following_lines"
                         }
                     }
                 }
