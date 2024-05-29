@@ -1,7 +1,7 @@
 # write-this-like-a-tv-character
 
 ### Overview
-This dataset created for the paper "Your Task is to Write this Title Like a TV Character".
+This dataset created for the paper "Your Task is to Write this Title Like a TV Character". 
 The original source of the data is TVR ([Lei et al., 2020](
 https://tvr.cs.unc.edu/))
 
